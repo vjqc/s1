@@ -1,0 +1,7 @@
+Nombre: Javier Quispe Fernandez
+
+
+Restaure la base de datos =>
+
+	Nombre de la base de datos: BiblioContenidos
+	Archivo Backup: BD/BiblioContenidos.bak

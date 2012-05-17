@@ -1,0 +1,7 @@
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\bin\BiblioContenidos_2.dll
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\bin\BiblioContenidos_2.pdb
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\bin\EntityFramework.dll
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\bin\EntityFramework.xml
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\ResolveAssemblyReference.cache
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.dll
+I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.pdb

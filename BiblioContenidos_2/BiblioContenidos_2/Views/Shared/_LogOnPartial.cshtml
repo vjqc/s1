@@ -1,0 +1,8 @@
+﻿@if(Request.IsAuthenticated) {
+    <text>Bienvenido <strong> [ @Html.ActionLink(@User.Identity.Name, "Index","ActualizarUsuario") ]</strong>
+    [ @Html.ActionLink("Cerrar Sesión", "LogOff", "Account") ]
+    </text>
+}
+else {
+    @:[ @Html.ActionLink("Iniciar Sesión", "LogOn", "Account") ]
+}

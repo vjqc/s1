@@ -1,0 +1,21 @@
+﻿@model BiblioContenidos_2.Models.CargarLibro
+
+@{
+    ViewBag.Title = "Publicación de libros";
+}
+
+<h2>Publicar un Libro</h2>
+
+@using (@Html.BeginForm())
+{ 
+    @Html.ValidationSummary()
+    <table>
+        <tr><td>Autor: </td><td>@Html.TextBoxFor(a => a.Autor)</td></tr>
+        <tr><td>Año de publicación: </td><td>@Html.TextBoxFor(a => a.Anho)</td></tr>
+        <tr><td>Tema: </td><td>@Html.TextBoxFor(a => a.Tema)</td></tr>
+        <tr><td>Descripción general: </td><td>@Html.TextBoxFor(a => a.Descripcion)</td></tr>
+        <tr><td>Libro en formato PDF: </td><td><input type="file" name="LibroPdf" accept="application/pdf" /></td></tr>
+        <tr><td>Portada del libro: </td><td><input type="file" name="PortadaLibro" accept="image/*" /></td></tr>
+        <tr><td><input type="submit" value="Subir Libro" /></td><td>...</td></tr>
+    </table>
+}

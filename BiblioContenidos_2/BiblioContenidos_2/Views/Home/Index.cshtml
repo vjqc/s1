@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Página Principal";
+}
+<h2>Ultimos Libros publicados</h2>
+
+<table>
+@foreach(var item in @ViewBag.ListaLibros)
+{
+    <tr><td>@item.Descripcion</td><td>@item.Fecha</td><td>@item.Nick</td></tr>
+}
+</table>

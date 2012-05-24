@@ -6,6 +6,11 @@
 <table>
 @foreach(var item in @ViewBag.ListaLibros)
 {
-    <tr><td>@item.Descripcion</td><td>@item.Fecha</td><td>@item.Nick</td></tr>
+    <tr><td><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @item.Portada })" alt="" height="50" width="50" /></td>
+        <td>@item.Descripcion</td><td>@item.Fecha</td><td>@item.Nick (Karma: @item.Karma)</td>
+        <td>@Html.ActionLink("Ver","Index","DetalleLibro", new { id = @item.IdContenido }, null)</td>
+    </tr>    
 }
 </table>
+@Html.ActionLink("Admin", "Index", "Moderacion")<br />
+Administrador:admin Pwd:123456

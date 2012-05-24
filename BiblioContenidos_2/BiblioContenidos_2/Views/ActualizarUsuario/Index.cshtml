@@ -5,15 +5,15 @@
 }
 
 <h2>Actualizar Datos de Usuario</h2>
-
-@using (@Html.BeginForm())
+ 
+@using (@Html.BeginForm("Index", "ActualizarUsuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
     @Html.ValidationSummary()
     <table>
         <tr><th>Campo</th><th>Valor Actual</th><th>Nuevo Valor</th></tr>
         <tr><td>Nick:</td><td>@User.Identity.Name</td><td>...</td></tr>
         <tr><td>E-Mail:</td><td> @ViewBag.ce </td><td>...</td></tr>
-        <tr><td><label>Avatar:</label></td><td></td><td><input type="file" name="foto" accept="image/*"/></td></tr>
+        <tr><td><label>Avatar:</label></td><td>@if(@ViewBag.usuario != null){ <img src="@Url.Action("MostrarFoto")" alt="" height="50" width="50" /> }</td><td><input type="file" name="file" id="file" accept="image/*"/></td></tr>
         <tr><td><label>Apellido Paterno: </label></td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.ApPaterno }</td><td>@Html.TextBoxFor(a => a.ApPaterno)</td></tr>
         <tr><td><label>Apellido Materno: </label></td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.ApMaterno }</td><td>@Html.TextBoxFor(a => a.ApMaterno)</td></tr>
         <tr><td><label>Nombres: </label></td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.Nombres }</td><td>@Html.TextBoxFor(a => a.Nombres)</td></tr>
@@ -22,9 +22,9 @@
     </table>    
 }
 
+<h3>@Html.ActionLink("Resúmen de actividad", "Index", "ActualizarUsuario")</h3>
 @if (@ViewBag.Resumen != null)
 {
-    <h3>Resúmen de actividad</h3>
     <table>
         <tr><th>Fecha</th><th>Tipo de Publicación</th><th>Título</th><th>Estado</th></tr>
         @foreach (var item in @ViewBag.Resumen)

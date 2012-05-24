@@ -14,6 +14,7 @@
     <AssemblyName>BiblioContenidos_2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +65,10 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActualizarUsuarioController.cs" />
+    <Compile Include="Controllers\ContenidoController.cs" />
+    <Compile Include="Controllers\DetalleLibroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModeracionController.cs" />
     <Compile Include="Controllers\PublicacionContenidosController.cs" />
     <Compile Include="Controllers\UpLoadLibroController.cs" />
     <Compile Include="Global.asax.cs">
@@ -78,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleLibro.cs" />
     <Compile Include="Models\UltimoLibroPub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +115,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="Img\MeGusta.jpg" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
@@ -151,10 +157,20 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Uploads\Img\" />
+    <Folder Include="App_Data\Uploads\Pdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ActualizarUsuario\Index.cshtml" />
+    <Content Include="Views\PublicacionContenidos\Index.cshtml" />
+    <Content Include="Views\UpLoadLibro\Index.cshtml" />
+    <Content Include="Views\DetalleLibro\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\DataClasses1.dbml">
@@ -162,12 +178,8 @@
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\ActualizarUsuario\Index.cshtml" />
-    <Content Include="Views\PublicacionContenidos\Index.cshtml" />
-    <Content Include="Views\UpLoadLibro\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Content Include="Views\Moderacion\ModeracionContenidos.cshtml" />
+    <Content Include="Views\Moderacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\DataClasses1.dbml.layout">

@@ -1,0 +1,22 @@
+﻿@model BiblioContenidos_2.Models.DetalleLibro
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Detalle de Libro</h2>
+
+<table>
+    <tr><td>Titulo: </td><td>@ViewBag.Detalle.Titulo</td></tr>
+    <tr><td><img src="@Url.Action("ObtenerUrlImagen","Home", new { id = @ViewBag.Detalle.Portada})" alt="" height="200" width="200" /></td></tr>
+    <tr><td>Autor: </td><td>@ViewBag.Detalle.Autor</td></tr>
+    <tr><td>Descripcion: </td><td>@ViewBag.Detalle.Descripcion</td></tr>
+    <tr><td>@Html.ActionLink("Descargar", "DescargarLibro", new { id = @ViewBag.Detalle.Pdf } )</td></tr>
+    
+    <tr><td><a href="@Url.Action("MeGusta", "Contenido", new {id = @ViewBag.Detalle.IdContenido})"><img src="../../Img/MeGusta.jpg"  alt="Me Gusta"/></a></td><td>@ViewBag.msg</td></tr>
+    
+    <tr><td></td></tr>
+    <tr><td><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @ViewBag.Detalle.Avatar })" alt="" height="50" width="50" /></td><td>@ViewBag.Detalle.Nick</td></tr>
+
+    <tr><td>@if (User.Identity.Name == "admin") { @Html.ActionLink("Aprobar", "AprobarContenido", "Contenido", new {id = @ViewBag.Detalle.IdContenido}, null); }</td><td></td></tr>
+</table>

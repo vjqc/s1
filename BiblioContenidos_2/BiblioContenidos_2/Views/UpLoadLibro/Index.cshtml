@@ -6,7 +6,7 @@
 
 <h2>Publicar un Libro</h2>
 
-@using (@Html.BeginForm())
+@using (@Html.BeginForm("Index", "UpLoadLibro", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
     @Html.ValidationSummary()
     <table>
@@ -14,8 +14,8 @@
         <tr><td>Año de publicación: </td><td>@Html.TextBoxFor(a => a.Anho)</td></tr>
         <tr><td>Tema: </td><td>@Html.TextBoxFor(a => a.Tema)</td></tr>
         <tr><td>Descripción general: </td><td>@Html.TextBoxFor(a => a.Descripcion)</td></tr>
-        <tr><td>Libro en formato PDF: </td><td><input type="file" name="LibroPdf" accept="application/pdf" /></td></tr>
-        <tr><td>Portada del libro: </td><td><input type="file" name="PortadaLibro" accept="image/*" /></td></tr>
+        <tr><td>Libro en formato PDF: </td><td><input type="file" name="file" accept="application/pdf" id="file" /></td></tr>
+        <tr><td>Portada del libro: </td><td><input type="file" name="file2" accept="image/*" id="file2" /></td></tr>
         <tr><td><input type="submit" value="Subir Libro" /></td><td>...</td></tr>
     </table>
 }

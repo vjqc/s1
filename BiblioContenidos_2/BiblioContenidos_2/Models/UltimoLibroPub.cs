@@ -7,9 +7,10 @@ namespace BiblioContenidos_2.Models
 {
     public class UltimoLibroPub
     {
-        //public int IdUsuario { set; get; }
-        //public int IdContenido { set; get; }
+        public int IdUsuario { set; get; }
+        public int IdContenido { set; get; }
         public string Nick { set; get; }
+        public int Karma { set; get; }
         public string Portada { set; get; }
         public string Descripcion { set; get; }
         public DateTime Fecha { set; get;  }

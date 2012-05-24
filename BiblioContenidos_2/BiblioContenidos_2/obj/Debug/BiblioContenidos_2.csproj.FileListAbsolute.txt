@@ -5,3 +5,10 @@ I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\bin\EntityFramework
 I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\ResolveAssemblyReference.cache
 I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.dll
 I:\Source_ASP.NET MVC3\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.pdb
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\bin\BiblioContenidos_2.dll
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\bin\BiblioContenidos_2.pdb
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\bin\EntityFramework.dll
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\bin\EntityFramework.xml
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\ResolveAssemblyReference.cache
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.dll
+I:\s1\BiblioContenidos_2\BiblioContenidos_2\obj\Debug\BiblioContenidos_2.pdb

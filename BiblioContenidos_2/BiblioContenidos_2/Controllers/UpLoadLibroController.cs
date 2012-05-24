@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BiblioContenidos_2.Models;
+using System.IO;
 
 namespace BiblioContenidos_2.Controllers
 {
@@ -18,8 +19,29 @@ namespace BiblioContenidos_2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(CargarLibro model)
+        public ActionResult Index(CargarLibro model, HttpPostedFileBase file, HttpPostedFileBase file2)
         {
+            var fileName = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Uploads/Pdf"), fileName);
+
+                file.SaveAs(path);
+            }
+
+            var fileName2 = "";
+            if (file2 != null && file2.ContentLength > 0)
+            {
+                fileName2 = Path.GetFileName(file2.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Uploads/Img"), fileName2);
+
+                file2.SaveAs(path);
+            }
+            model.Portada = fileName2;
+            model.PdfLibro = fileName;
+
+
             if (ModelState.IsValid)
             {
                 DataClasses1DataContext db = new DataClasses1DataContext();
@@ -29,15 +51,15 @@ namespace BiblioContenidos_2.Controllers
                 int IdUsuario = db.Usuarios.Where(a => a.UserId == IdUs).Select(a => a.Id).ToArray()[0];
 
                 model.Fecha = DateTime.Now;
-
+                
                 Contenido contenido = new Contenido() { 
                     FechaPublicacion = model.Fecha,
                     IdUsuario = IdUsuario,
                     Tipo = "Libro",
                     Titulo = model.Tema,
                     Descripcion = model.Descripcion,
-                    IdCategoria = 1,
-                    UrlReal = "",
+                    //IdCategoria = 1,
+                    UrlReal = model.PdfLibro,
                     UrlVirtual = "",
                     Estado = "Pendiente"
                 };
@@ -49,9 +71,10 @@ namespace BiblioContenidos_2.Controllers
                 Libro libro = new Libro()
                 {
                     Autor = model.Autor,
+                    //Portada = model.Portada,
                     Portada = model.Portada,
                     Indice = "",
-                    AnhoPublicacion = model.Anho.ToString(),
+                    AnhoPublicacion = (int)model.Anho,
                     IdContenido = IdConte
                 };
                 db.Libros.InsertOnSubmit(libro);

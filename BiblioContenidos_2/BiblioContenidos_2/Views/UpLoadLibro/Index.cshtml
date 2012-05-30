@@ -16,6 +16,8 @@
         <tr><td>Descripción general: </td><td>@Html.TextBoxFor(a => a.Descripcion)</td></tr>
         <tr><td>Libro en formato PDF: </td><td><input type="file" name="file" accept="application/pdf" id="file" /></td></tr>
         <tr><td>Portada del libro: </td><td><input type="file" name="file2" accept="image/*" id="file2" /></td></tr>
-        <tr><td><input type="submit" value="Subir Libro" /></td><td>...</td></tr>
+        <tr><td>Categorías</td><td>@Html.TextBoxFor(a => a.Categorias)</td></tr>
+        <tr><td>Categorías rechazadas</td>@ViewBag.CatRecha</tr>
+        <tr><td><input type="submit" value="Subir Libro" /></td><td></td></tr>
     </table>
 }

@@ -30,38 +30,39 @@ namespace BiblioContenidos_2.Models
     public class LogOnModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nombre de Usuario")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Recordarme?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nombre de Usuario")]
         public string UserName { get; set; }
 
         [Required]
+        [RegularExpression("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*", ErrorMessage = "E-Mail no válido")]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
+        [Display(Name = "Correo Electrónico (E-Mail)")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} caracteres de longitud.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("Password", ErrorMessage = "La Contraseña y la Confirmación de Contraseña son diferentes.")]
         public string ConfirmPassword { get; set; }
     }
 }

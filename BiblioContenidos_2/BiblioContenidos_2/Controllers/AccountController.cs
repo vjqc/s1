@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using BiblioContenidos_2.Models;
 
+using CaptchaMVC.HtmlHelpers;
+
 namespace BiblioContenidos_2.Controllers
 {
     public class AccountController : Controller
@@ -22,18 +24,27 @@ namespace BiblioContenidos_2.Controllers
 
         //
         // POST: /Account/LogOn
+        
 
         [HttpPost]
+        //public ActionResult LogOn(CaptchaModel cm, LogOnModel model, string returnUrl)
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
+                    if (Session["captcha"] != null && (int)Session["captcha"] > 2 && !this.IsCaptchaVerify("Captcha no válido"))
+                    {
+                        return View(model);
+                    }
+
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
+
+                        //Session["captcha"] = 0;
                         return Redirect(returnUrl);
                     }
                     else
@@ -43,7 +54,21 @@ namespace BiblioContenidos_2.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    
+                    ModelState.AddModelError("", "El nombre de usuario o la contraseña es incorrecto.");
+
+                    if (Session["captcha"] != null && (int)Session["captcha"] > 2 && !this.IsCaptchaVerify("Captcha no válido"))
+                    {
+                        return View(model);
+                    }
+                    
+                    if (Session["captcha"] == null)
+                    {
+                        Session["captcha"] = 0;
+                    }
+                    int c = (int)Session["captcha"];
+                    c++;
+                    Session["captcha"] = c;
                 }
             }
 
@@ -56,6 +81,7 @@ namespace BiblioContenidos_2.Controllers
 
         public ActionResult LogOff()
         {
+            Session.Clear();
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
@@ -179,16 +205,16 @@ namespace BiblioContenidos_2.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+                    return "El Nombre de Usuario ya existe. Por favor introduzca un nombre de usuario diferente.";
 
                 case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+                    return "Ese E-Mail ya esta registrado. Por favor introduzca un E-Mail diferente.";
 
                 case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
+                    return "La contraseña es inválida. Por favor introduzca una contraseña válida.";
 
                 case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
+                    return "El E-Mail no es válido. Por favor verifique e intente de nuevo.";
 
                 case MembershipCreateStatus.InvalidAnswer:
                     return "The password retrieval answer provided is invalid. Please check the value and try again.";
@@ -197,7 +223,7 @@ namespace BiblioContenidos_2.Controllers
                     return "The password retrieval question provided is invalid. Please check the value and try again.";
 
                 case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
+                    return "El Nombre de Usuario no es válido. Por favor verifique e intente de nuevo.";
 
                 case MembershipCreateStatus.ProviderError:
                     return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
@@ -206,7 +232,7 @@ namespace BiblioContenidos_2.Controllers
                     return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 
                 default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    return "Ocurrió un error desconocido. Por favor verifique e intente de nuevo.. Si el problema persiste, por favor contacte con el administrador de sistemas.";
             }
         }
         #endregion

@@ -60,6 +60,14 @@ namespace BiblioContenidos_2.Controllers
             contenido.Estado = "Aceptado";
             db.SubmitChanges();
 
+            List<RelContenidosCategoria> ListaRelCC = db.RelContenidosCategorias.Where(r=>r.IdContenido==IdContenido).ToList();
+            foreach (var item in ListaRelCC)
+            {
+                Categoria cat = db.Categorias.Single(p => p.Id == item.IdCategoria);
+                cat.Estado = "Aceptado";
+            }
+            db.SubmitChanges();
+
             return Redirect("/Moderacion/ModeracionContenidos");
         }
 

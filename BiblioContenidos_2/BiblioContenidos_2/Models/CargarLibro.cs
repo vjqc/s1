@@ -26,5 +26,8 @@ namespace BiblioContenidos_2.Models
         public string PdfLibro { set; get; }
         
         public DateTime Fecha { set; get;  }
+
+        [Required(ErrorMessage = "A que Categoria(s), pertenece el libro")]
+        public string Categorias { set; get; }
     }
 }

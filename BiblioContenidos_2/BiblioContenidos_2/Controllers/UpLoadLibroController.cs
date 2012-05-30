@@ -71,7 +71,6 @@ namespace BiblioContenidos_2.Controllers
                 Libro libro = new Libro()
                 {
                     Autor = model.Autor,
-                    //Portada = model.Portada,
                     Portada = model.Portada,
                     Indice = "",
                     AnhoPublicacion = (int)model.Anho,
@@ -79,10 +78,51 @@ namespace BiblioContenidos_2.Controllers
                 };
                 db.Libros.InsertOnSubmit(libro);
                 db.SubmitChanges();
-                //ViewBag.id = IdConte;
+
+                //Categorias
+                char[] separadores = { ',' };
+                string[] categorias = model.Categorias.Split(separadores);
+                char[] t = { ' ' };
+                List<string> CatRechazadas = new List<string>();
+
+                foreach (string str in categorias)
+                {
+                    string str2 = str.Trim(t);
+                    int esta = db.Categorias.Count(c => c.Descripcion == str2);
+                    
+                    if (esta == 0)
+                    {
+                        Categoria categoria = new Categoria()
+                        {
+                            Descripcion = str2,
+                            Estado = "Pendiente"
+                        };
+                        db.Categorias.InsertOnSubmit(categoria);
+                        db.SubmitChanges();
+                    }
+
+                    int IdCat = db.Categorias.Single(c => c.Descripcion == str2).Id;
+                    string estado = db.Categorias.Single(c => c.Descripcion==str2).Estado;
+                    if (estado != "Rechazado")
+                    {
+                        RelContenidosCategoria rel = new RelContenidosCategoria()
+                        {
+                            IdContenido = IdConte,
+                            IdCategoria = IdCat
+                        };
+                        db.RelContenidosCategorias.InsertOnSubmit(rel);
+                    }
+                    else
+                        CatRechazadas.Add(str2);
+                        
+                   
+                }
+                ViewBag.CatRecha = CatRechazadas;
                 
+                db.SubmitChanges();
             }
             return View();
+            
         }
     }
 }

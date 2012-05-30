@@ -40,6 +40,13 @@
                 @Html.LabelFor(m => m.RememberMe)
             </div>
 
+            @if (Session["captcha"] != null && (int)Session["captcha"] > 2)
+            {
+                @CaptchaMVC.HtmlHelpers.CaptchaHelper.Captcha(Html, "Otra imagen", "Introduzca los símbolos", 4)
+                
+            }
+                  
+               
             <p>
                 <input type="submit" value="Iniciar Sesión" />
             </p>

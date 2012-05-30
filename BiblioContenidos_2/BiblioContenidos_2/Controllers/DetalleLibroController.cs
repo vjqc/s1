@@ -47,7 +47,10 @@ namespace BiblioContenidos_2.Controllers
                 Pdf = cnt.UrlReal,
                 
                 Nick = cnt.Usuario.aspnet_User.UserName,
-                Avatar = cnt.Usuario.Avatar
+                Avatar = cnt.Usuario.Avatar,
+         
+                Categos = db.RelContenidosCategorias.Where(rc => rc.IdContenido==cnt.Id).Select(p => p.Categoria).ToList()
+
             };
 
             ViewBag.Detalle = Detalle;

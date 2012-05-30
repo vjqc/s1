@@ -5,3 +5,8 @@ Restaure la base de datos =>
 
 	Nombre de la base de datos: BiblioContenidos
 	Archivo Backup: BD/BiblioContenidos.bak
+
+
+NOTAS:
+Para aprobar un contenido publicado la cuenta del administrador es:
+(admin , pwd: 123456).

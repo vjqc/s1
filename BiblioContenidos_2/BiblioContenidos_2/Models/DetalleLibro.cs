@@ -19,5 +19,7 @@ namespace BiblioContenidos_2.Models
 
         public string Nick { set; get; }
         public string Avatar { set; get; }
+
+        public List<Categoria> Categos { set; get; }
     }
 }

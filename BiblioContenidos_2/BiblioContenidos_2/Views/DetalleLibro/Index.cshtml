@@ -12,6 +12,15 @@
     <tr><td>Autor: </td><td>@ViewBag.Detalle.Autor</td></tr>
     <tr><td>Descripcion: </td><td>@ViewBag.Detalle.Descripcion</td></tr>
     <tr><td>@Html.ActionLink("Descargar", "DescargarLibro", new { id = @ViewBag.Detalle.Pdf } )</td></tr>
+
+    <tr><td>Categorias:</td>
+        <td>
+            @foreach (var item in @ViewBag.Detalle.Categos)
+            { 
+                @item.Descripcion <label>,</label>
+            }
+        </td>
+    </tr>
     
     <tr><td><a href="@Url.Action("MeGusta", "Contenido", new {id = @ViewBag.Detalle.IdContenido})"><img src="../../Img/MeGusta.jpg"  alt="Me Gusta"/></a></td><td>@ViewBag.msg</td></tr>
     

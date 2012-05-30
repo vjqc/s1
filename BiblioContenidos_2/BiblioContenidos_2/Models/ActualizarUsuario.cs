@@ -23,5 +23,7 @@ namespace BiblioContenidos_2.Models
 
         [RegularExpression("[A-Za-z A-Za-z]{3,30}", ErrorMessage = "[Ubicación] no válida")] //Modif
 	    public string Ubicacion { set; get; }
+
+        public string Intereses { set; get; }
     }
 }

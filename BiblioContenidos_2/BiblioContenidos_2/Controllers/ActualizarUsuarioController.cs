@@ -75,7 +75,11 @@ namespace BiblioContenidos_2.Controllers
                 if ( !String.IsNullOrEmpty(model.ApPaterno) ) usuario.ApPaterno = model.ApPaterno;
                 if ( !String.IsNullOrEmpty(model.ApMaterno) ) usuario.ApMaterno = model.ApMaterno;
                 if ( !String.IsNullOrEmpty(model.Nombres) )   usuario.Nombres = model.Nombres;
-                if ( !String.IsNullOrEmpty(model.Ubicacion)) usuario.Ubicacion = model.Ubicacion;
+                if ( !String.IsNullOrEmpty(model.Ubicacion))  usuario.Ubicacion = model.Ubicacion;
+                if (!String.IsNullOrEmpty(model.Intereses)) 
+                { 
+                
+                }
                 
                 db.SubmitChanges();
             }

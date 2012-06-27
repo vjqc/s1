@@ -1,0 +1,22 @@
+﻿@using CodeKicker.BBCode;
+@using djsolid.BBCodeHelper;
+
+@{
+    ViewBag.Title = "Ver";
+}
+
+<h2>Ver</h2>
+
+<ul>
+@foreach(var item in @ViewBag.lista)
+{
+    <li>
+        <h1>
+            @item.Titulo
+        </h1>
+        <div>
+            @MvcHtmlString.Create(@BBCode.ToHtml(@item.Descripcion))
+        </div>
+    </li>   
+}
+</ul>

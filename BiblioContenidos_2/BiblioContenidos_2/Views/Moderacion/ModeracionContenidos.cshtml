@@ -8,7 +8,13 @@
 @foreach (var item in @ViewBag.ListaPend)
 { 
     <tr><td>@item.FechaPublicacion</td><td>@item.Titulo</td><td>@item.Tipo</td><td>@item.IdUsuario</td><td>@item.Estado</td>
-        <td>@Html.ActionLink("Ver","Index","DetalleLibro", new { id = @item.Id }, null)</td>
+        <td>
+            @if (@item.Tipo == "Libro")
+            { @Html.ActionLink("Ver", "Index", "DetalleLibro", new { id = @item.Id }, null) }
+            
+            @if (@item.Tipo == "Articulo")
+            { @Html.ActionLink("Ver", "VerArticulo", "Contenido", new { id = @item.Id }, null) }                                  
+        </td>
     </tr>
 }
 </table>

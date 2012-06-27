@@ -38,6 +38,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CaptchaMVC.dll</HintPath>
     </Reference>
+    <Reference Include="CodeKicker.BBCode, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CodeKicker.BBCode.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeKicker.BBCode.resources, Version=5.0.0.0, Culture=it-IT, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CodeKicker.BBCode.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="djsolid.BBCodeHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\djsolid.BBCodeHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
@@ -81,12 +93,15 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ActualizarUsuario.cs" />
     <Compile Include="Models\CargarLibro.cs" />
+    <Compile Include="Models\ComentarioView.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleActividad.cs" />
     <Compile Include="Models\DetalleLibro.cs" />
+    <Compile Include="Models\UltimoArticuloPub.cs" />
     <Compile Include="Models\UltimoLibroPub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,13 +194,18 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Moderacion\ModeracionContenidos.cshtml" />
+    <Content Include="Views\Moderacion\Index.cshtml" />
+    <Content Include="Views\PublicacionContenidos\Editor.cshtml" />
+    <Content Include="Views\PublicacionContenidos\Ver.cshtml" />
+    <Content Include="Views\Contenido\VerArticulo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Models\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Moderacion\ModeracionContenidos.cshtml" />
-    <Content Include="Views\Moderacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\DataClasses1.dbml.layout">

@@ -1,0 +1,19 @@
+﻿@model BiblioContenidos_2.Models.Contenido
+
+@{
+    ViewBag.Title = "Editor";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("textarea").sceditorBBCodePlugin();
+    });
+</script>
+
+<h2>Editor</h2>
+
+@using (Html.BeginForm()) { 
+    @Html.TextBoxFor(a => a.Titulo)
+    @Html.TextAreaFor(a => a.Descripcion, new { @Style = "height:200px;width:500px;"})
+    <input type="submit" value="enviar"/>
+}

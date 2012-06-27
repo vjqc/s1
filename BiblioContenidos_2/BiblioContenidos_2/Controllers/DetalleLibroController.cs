@@ -31,8 +31,10 @@ namespace BiblioContenidos_2.Controllers
 
             int con = db.Gustas.Count(p => p.IdContenido == IdCont);
             if (con == 0) ViewBag.msg = "Sé la primera persona a quien le gusta ésto";
+            //else ViewBag.msg = "";
             else if (con == 1) ViewBag.msg = "A una persona le gusta ésto";
             else ViewBag.msg = "A " + con + " personas les gusta ésto";
+             
             
             Contenido cnt = db.Contenidos.Single(c => c.Id == IdCont);
             DetalleLibro Detalle = new DetalleLibro()

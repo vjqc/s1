@@ -1,0 +1,50 @@
+﻿@using CodeKicker.BBCode;
+@using djsolid.BBCodeHelper;
+
+@model BiblioContenidos_2.Models.Comentario
+
+@{
+    ViewBag.Title = "VerArticulo";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("textarea").sceditorBBCodePlugin();
+    });
+</script>
+
+@if (@ViewBag.Articulo != null)
+{
+    <h1>@ViewBag.Articulo.Titulo</h1>
+    <div>@MvcHtmlString.Create(@BBCode.ToHtml(@ViewBag.Articulo.Descripcion))</div>
+    
+    <p>@if (!User.Identity.IsAuthenticated)    { @ViewBag.msg } </p>
+   
+    <div id="NuevoComentario">@MvcHtmlString.Create(@ViewBag.Comentarios)</div>
+
+
+    if (User.Identity.Name == "admin")
+    { 
+        @Html.ActionLink("Aprobar", "AprobarContenido", "Contenido", new { id = @ViewBag.Articulo.Id }, null);
+    }
+
+    if (User.Identity.IsAuthenticated)
+    {
+
+        using (Ajax.BeginForm("MeGustaPOST", "Contenido", new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "ACuantosGusta" }))
+        { 
+                <input type="hidden" name="IdConte" id="IdConte" value=@ViewBag.Articulo.Id />
+                <input type="image" src="../../Img/MeGusta.jpg"  alt="Me Gusta"/>
+        }
+        <div id="ACuantosGusta">@ViewBag.msg</div>
+        
+        <h2>Deja un comentario</h2>
+        using (Ajax.BeginForm("Comentar", "Contenido", new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "NuevoComentario" }))
+        {
+            <input type="hidden" id="conte" name="conte" value="@ViewBag.Articulo.Id" />
+            @Html.TextAreaFor(a => a.Comentario1, new { @Style = "height:200px;width:500px;", id = "comentario", name = "comentario" })
+            <input type="submit" value="Comentar"/>
+        }
+    }
+}                                                                                                                                         

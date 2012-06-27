@@ -14,6 +14,18 @@ namespace BiblioContenidos_2.Controllers
         //
         // GET: /ActualizarUsuario/
 
+        public int GetPuntos(string Tipo)
+        {
+            switch (Tipo)
+            {
+                case "Articulo": return 10;
+                case "Tutorial": return 50;
+                case "Curso": return 200;
+                case "Libro": return 100;
+            }
+            return 0;
+        }
+
         public ActionResult Index()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
@@ -27,9 +39,22 @@ namespace BiblioContenidos_2.Controllers
             ViewBag.usuario = usuario;
 
             //Resumen de actividad (Contenidos Publicados)
-            //int IdUsuario = usuario.Id;
-            ViewBag.Resumen = db.Contenidos.Where(q => q.IdUsuario == usuario.Id);
+            //ViewBag.Resumen = db.Contenidos.Where(q => q.IdUsuario == usuario.Id); ok sprint 1
             
+            List<DetalleActividad> Lista = db.Contenidos.Where(u=>u.IdUsuario==usuario.Id).Select(a => new DetalleActividad()
+            {
+                FechaPublicacion = a.FechaPublicacion,
+                Tipo = a.Tipo,
+                Titulo = a.Titulo,
+                Estado = a.Estado,
+                Puntos = GetPuntos(a.Tipo),
+                TotalMeGusta = db.Gustas.Where(g=>g.MeGusta==1 && g.IdContenido==a.Id).Count()
+            }).ToList();
+
+            ViewBag.TotalG  = Lista.Sum(l => l.TotalMeGusta);
+            ViewBag.Resumen = Lista;
+           
+                        
             return View();
         }
 

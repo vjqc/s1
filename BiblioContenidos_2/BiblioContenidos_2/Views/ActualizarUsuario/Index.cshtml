@@ -19,6 +19,7 @@
         <tr><td><label>Nombres: </label></td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.Nombres }</td><td>@Html.TextBoxFor(a => a.Nombres)</td></tr>
         <tr><td><label>Ubicación: </label></td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.Ubicacion }</td><td>@Html.TextBoxFor(a => a.Ubicacion)</td></tr>
         <tr><td>Intereses:<td></td><td>@Html.TextBoxFor(a => a.Intereses)</td></tr>
+        <tr><td>Karma:</td><td>@if(@ViewBag.usuario != null){ @ViewBag.usuario.Karma }</td></tr>
         <tr><td><input type="submit" value="Enviar"/></td><td>@Html.ActionLink("Reestablecer", "Index", "ActualizarUsuario")</td><td>@Html.ActionLink("Cerrar", "Index", "Home")</td></tr>
     </table>    
 }
@@ -27,10 +28,18 @@
 @if (@ViewBag.Resumen != null)
 {
     <table>
-        <tr><th>Fecha</th><th>Tipo de Publicación</th><th>Título</th><th>Estado</th></tr>
+        <tr><th>Fecha</th><th>Tipo de Publicación</th><th>Título</th><th>Estado</th><th>Puntos</th><th align="center">MeGusta</th></tr>
         @foreach (var item in @ViewBag.Resumen)
         { 
-            <tr><td>@item.FechaPublicacion</td><td>@item.Tipo</td><td>@item.Titulo</td><td>@item.Estado</td></tr>
+            <tr>
+                <td>@item.FechaPublicacion</td><td>@item.Tipo</td><td>@item.Titulo</td><td>@item.Estado</td>
+                <td>@if(@item.Estado=="Aceptado"){ 
+                        @item.Puntos
+                    }
+                </td>
+                <td align="center">@item.TotalMeGusta</td>
+            </tr>
         }
-    </table>
+        <tr><td></td><td></td><td></td><td></td><td>Total MeGusta: </td><td align="center">@ViewBag.TotalG</td></tr>
+        </table>
 }

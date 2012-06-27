@@ -22,7 +22,17 @@
         </td>
     </tr>
     
-    <tr><td><a href="@Url.Action("MeGusta", "Contenido", new {id = @ViewBag.Detalle.IdContenido})"><img src="../../Img/MeGusta.jpg"  alt="Me Gusta"/></a></td><td>@ViewBag.msg</td></tr>
+    @*<tr><td><a href="@Url.Action("MeGusta", "Contenido", new {id = @ViewBag.Detalle.IdContenido})"><img src="../../Img/MeGusta.jpg"  alt="Me Gusta"/></a></td><td>@ViewBag.msg</td></tr>*@
+    <tr><td>
+        @if (User.Identity.IsAuthenticated)
+        {
+            using (Ajax.BeginForm("MeGustaPOST", "Contenido", new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "ACuantosGusta" }))
+            { 
+                <input type="hidden" name="IdConte" id="IdConte" value=@ViewBag.Detalle.IdContenido />
+                <input type="image" src="../../Img/MeGusta.jpg"  alt="Me Gusta"/>
+            }
+        }
+    </td><td><div id="ACuantosGusta">@ViewBag.msg</div></td></tr>
     
     <tr><td></td></tr>
     <tr><td><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @ViewBag.Detalle.Avatar })" alt="" height="50" width="50" /></td><td>@ViewBag.Detalle.Nick</td></tr>

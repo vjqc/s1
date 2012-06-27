@@ -180,7 +180,7 @@
       <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Tipo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Titulo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(3500)" CanBeNull="true" />
       <Column Name="UrlReal" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UrlVirtual" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -267,7 +267,7 @@
       <Column Name="ApMaterno" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Nombres" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Ubicacion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="Karma" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Karma" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="Usuario_Comentario" Member="Comentarios" ThisKey="Id" OtherKey="IdUsuario" Type="Comentario" />
       <Association Name="Usuario_Contenido" Member="Contenidos" ThisKey="Id" OtherKey="IdUsuario" Type="Contenido" />

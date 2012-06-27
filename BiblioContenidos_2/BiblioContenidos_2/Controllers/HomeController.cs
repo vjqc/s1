@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using BiblioContenidos_2.Models;
 using System.IO;
 
+//using CodeKicker.BBCode;
+///using djsolid.BBCodeHelper;
+
 namespace BiblioContenidos_2.Controllers
 {
     public class HomeController : Controller
@@ -26,8 +29,20 @@ namespace BiblioContenidos_2.Controllers
                     IdContenido = a.Id,
                     IdUsuario = a.IdUsuario
             }).OrderByDescending(f=>f.Fecha).Take(10).ToList();
-
             ViewBag.ListaLibros = ListaLibros;
+
+            List<UltimoArticuloPub> ListaArticulos = db.Contenidos.Where(p => p.Tipo == "Articulo" && p.Estado == "Aceptado").Select(a =>
+                new UltimoArticuloPub
+                {
+                    Nick = a.Usuario.aspnet_User.UserName,
+                    Karma = (int)a.Usuario.Karma,
+                    Titulo = a.Titulo,
+                    Descripcion = a.Descripcion.Substring(0, 25) + " ... ",
+                    Fecha = a.FechaPublicacion,
+                    IdContenido = a.Id,
+                    IdUsuario = a.IdUsuario
+                }).OrderByDescending(f => f.Fecha).Take(10).ToList();
+            ViewBag.ListaArticulos = ListaArticulos;
             
             return View();
         }

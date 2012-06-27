@@ -4006,7 +4006,7 @@ namespace BiblioContenidos_2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(300)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(3500)")]
 		public string Descripcion
 		{
 			get
@@ -5614,7 +5614,7 @@ namespace BiblioContenidos_2.Models
 		
 		private string _Ubicacion;
 		
-		private System.Nullable<int> _Karma;
+		private System.Nullable<double> _Karma;
 		
 		private System.Guid _UserId;
 		
@@ -5644,7 +5644,7 @@ namespace BiblioContenidos_2.Models
     partial void OnNombresChanged();
     partial void OnUbicacionChanging(string value);
     partial void OnUbicacionChanged();
-    partial void OnKarmaChanging(System.Nullable<int> value);
+    partial void OnKarmaChanging(System.Nullable<double> value);
     partial void OnKarmaChanged();
     partial void OnUserIdChanging(System.Guid value);
     partial void OnUserIdChanged();
@@ -5780,8 +5780,8 @@ namespace BiblioContenidos_2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Karma", DbType="Int")]
-		public System.Nullable<int> Karma
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Karma", DbType="Float")]
+		public System.Nullable<double> Karma
 		{
 			get
 			{

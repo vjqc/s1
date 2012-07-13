@@ -48,7 +48,8 @@ namespace BiblioContenidos_2.Controllers
                 Titulo = a.Titulo,
                 Estado = a.Estado,
                 Puntos = GetPuntos(a.Tipo),
-                TotalMeGusta = db.Gustas.Where(g=>g.MeGusta==1 && g.IdContenido==a.Id).Count()
+                TotalMeGusta = db.Gustas.Where(g=>g.MeGusta==1 && g.IdContenido==a.Id).Count(),
+                IdContenido = a.Id
             }).ToList();
 
             ViewBag.TotalG  = Lista.Sum(l => l.TotalMeGusta);

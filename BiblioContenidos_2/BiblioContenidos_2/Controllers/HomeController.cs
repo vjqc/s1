@@ -43,7 +43,21 @@ namespace BiblioContenidos_2.Controllers
                     IdUsuario = a.IdUsuario
                 }).OrderByDescending(f => f.Fecha).Take(10).ToList();
             ViewBag.ListaArticulos = ListaArticulos;
-            
+
+
+            List<UltimoCursoPub> ListaCursos = db.Contenidos.Where(p => p.Tipo == "Curso" && p.Estado == "Aceptado").Select(a =>
+                new UltimoCursoPub
+                {
+                    Nick = a.Usuario.aspnet_User.UserName,
+                    Karma = (int)a.Usuario.Karma,
+                    Titulo = a.Titulo,
+                    Descripcion = a.Descripcion.Substring(0, 25) + " ... ",
+                    Fecha = a.FechaPublicacion,
+                    IdContenido = a.Id,
+                    IdUsuario = a.IdUsuario
+                }).OrderByDescending(f => f.Fecha).Take(10).ToList();
+            ViewBag.ListaCursos = ListaCursos;
+
             return View();
         }
         
@@ -51,6 +65,13 @@ namespace BiblioContenidos_2.Controllers
         {
             if (String.IsNullOrEmpty(id)) id = "";
             return File(Path.Combine(Server.MapPath("~/App_Data/Uploads/Img"), id), "image/jpg");
+        }
+
+        public ActionResult ObtenerUrlImagen2(string id)
+        {
+            if (String.IsNullOrEmpty(id)) id = "";
+            //return File(Path.Combine(Server.MapPath("~/Content/Uploads/"), id), "image/jpg");
+            return File(Path.Combine(Server.MapPath(""), id), "image/jpg");
         }
 
         public ActionResult About()

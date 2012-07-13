@@ -1,5 +1,10 @@
 use BiblioContenidos;
+
+--insert into Usuarios (Avatar,ApPaterno,ApMaterno,Nombres,Ubicacion,Karma,UserId) values('','','','Admin','Potosi',0,'B37D3498-0AAE-4625-B8F2-F96C4EF418A1');
+
 --select * from aspnet_Users;
+--select * from Usuarios;
+
 --select * from aspnet_Membership;
 --select * from Categorias;
 --insert into Categorias(Descripcion, Estado) Values ('Programación', 'Aceptado')

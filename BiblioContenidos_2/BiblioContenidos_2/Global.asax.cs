@@ -27,6 +27,11 @@ namespace BiblioContenidos_2
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
+            routes.MapRoute(
+                "NetAdvImage",
+                "{scriptPath}/tiny_mce/plugins/netadvimage/{action}",
+                new { controller = "NetAdvImage" }
+);
         }
 
         protected void Application_Start()

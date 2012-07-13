@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BiblioContenidos_2.Models.Comentario>
+@{
+    ViewBag.Title = "BuscarPalabrasOfensivas";
+}
+
+<h2>Comentarios con palabras ofensivas</h2>
+
+@if(ViewBag.Observados != null )
+{
+    
+   @* foreach (var k in ViewBag.Observados)
+    { 
+        @k.Comentario1; <br/>
+        @k.Usuario.aspnet_User.UserName;
+    }*@
+    
+    var data = ViewBag.Observados;
+    var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
+    grid.Pager(WebGridPagerModes.NextPrevious);
+                                                                                
+        @grid.GetHtml(tableStyle: "webGrid",
+        headerStyle: "header",
+                alternatingRowStyle: "alt",
+                columns: grid.Columns(
+        //grid.Column("Tipo", canSort: true, format: @<text>@Html.ActionLink((string)item.Tipo,"VerContenido","Contenido",new {id=item.Id}, null)</text>),
+        //grid.Column("Avatar", "Avatar", format: @<b><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @item.Usuario.Avatar })" alt="" height="50" width="50" /></b>),
+        //grid.Column("Usuario", "Usuario",canSort: true, format: @<b>@item.Usuario.aspnet_User.UserName</b>),
+        grid.Column("Usuario", "Usuario", format: @<b><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @item.Usuario.Avatar })" alt="" height="50" width="50" />@item.Usuario.aspnet_User.UserName</b>),
+        grid.Column("Comentario1", "Comentario", format: @<b>@item.Comentario1</b>),
+        grid.Column("Estado", "Estado", canSort: true, format: @<b>@item.Estado</b>),
+        grid.Column("Editar", "Editar", format: @<b><a href="@Url.Action("EliminarComentario", "Moderacion", new { id = @item.id }, null)"><img src="../../sh/img/knobs-icons/Knob Cancel.png" alt="Borrar"/></a></b>)
+                                                     ));
+}
+
+<br /><a href="@Url.Content("~/Moderacion/ModeracionComentarios#cuerpo")"><img src="../../sh/img/knobs-icons/Knob Left.png" alt="Atras"/></a>
+<br /><a href="@Url.Content("~/Moderacion/Index#cuerpo")">Menu admin</a><br />

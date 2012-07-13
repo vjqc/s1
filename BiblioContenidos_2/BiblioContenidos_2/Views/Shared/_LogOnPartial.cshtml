@@ -1,8 +1,19 @@
-﻿@if(Request.IsAuthenticated) {
-    <text>Bienvenido <strong> [ @Html.ActionLink(@User.Identity.Name, "Index","ActualizarUsuario") ]</strong>
-    [ @Html.ActionLink("Cerrar Sesión", "LogOff", "Account") ]
+﻿<style type="text/css">
+    a { text-decoration: none; color:White}
+    div.q { color:Orange;}
+</style>
+
+@if(Request.IsAuthenticated) {
+    <text>
+    <div class="q">&nbsp;&nbsp;&nbsp;Bienvenido <strong> [ @Html.ActionLink(@User.Identity.Name, "Index","ActualizarUsuario") ]</strong>
+        [ @Html.ActionLink("Cerrar Sesión", "LogOff", "Account") ]
+    </div>
     </text>
 }
 else {
-    @:[ @Html.ActionLink("Iniciar Sesión", "LogOn", "Account") ]
+    <text>&nbsp; &nbsp; &nbsp;</text>
+    @*@:[ @Html.ActionLink("Iniciar Sesión", "LogOn", "Account") ]*@
+    <text>[<a href="/Account/LogOn#cuerpo">Iniciar Sesión</a>]</text>
+    @*@:[ @Html.ActionLink("Registrarse","Register", "Account") ]*@
+    <text>[<a href="/Account/Register#cuerpo">Registrarse</a>]</text>
 }

@@ -4,6 +4,7 @@
     ViewBag.Title = "Inicio de Sesión";
 }
 
+<center>
 <h2>Inicio de Sesión</h2>
 <p>
     Por favor ingresa tu Nombre de Usuario (Nick) y Contraseña. Ó @Html.ActionLink("Regístrate", "Register") si no tienes una cuenta.
@@ -13,6 +14,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @Html.ValidationSummary(true, "Fallo en el inicio de sesión. Por favor corrige los errores e intenta otra vez.")
+
 
 @using (Html.BeginForm()) {
     <div>
@@ -53,3 +55,4 @@
         </fieldset>
     </div>
 }
+</center>

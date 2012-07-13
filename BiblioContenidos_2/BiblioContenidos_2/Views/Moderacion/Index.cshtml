@@ -1,8 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index Moderacion";
 }
 
 <h2>Moderación</h2>
 
-@Html.ActionLink("Contenidos", "ModeracionContenidos", "Moderacion") <br />
+<ul>
+    <li><a href="@Url.Content("~/Moderacion/ModeracionContenidos#cuerpo")">Moderacion de Contenidos</a></li>
+    <li><a href="@Url.Content("~/ModeracionCategorias/Index#cuerpo")">Moderacion de Categorías</a></li>
+    <li><a href="@Url.Content("~/Moderacion/ModeracionComentarios#cuerpo")">Moderacion de Comentarios</a></li>
+    <li><a href="@Url.Content("~/Moderacion/ModeracionUsuarios#cuerpo")">Moderacion de Usuarios</a></li>
+</ul>
+
+
 

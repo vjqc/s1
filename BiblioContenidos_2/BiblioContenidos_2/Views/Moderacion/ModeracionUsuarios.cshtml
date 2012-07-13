@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BiblioContenidos_2.Models.Usuario>
+
+@{
+    ViewBag.Title = "ModeracionUsuarios";
+}
+<h6>..</h6>
+<center>
+    <h2>Moderacion de usuarios</h2>
+    <h6>Usuarios con mayor karma</h6>
+    <img src="/Moderacion/TopUsuarios" />
+</center>
+    
+@{                
+        var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
+        grid.Pager(WebGridPagerModes.NextPrevious);
+                                                                                
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                columns: grid.Columns(
+                    grid.Column("Usuario", "Usuario", canSort: true, format: @<b><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @item.Avatar })" alt="" height="50" width="50" />@item.aspnet_User.UserName (@item.Karma)</b>),
+                    grid.Column("Activida","Actividad", canSort: false, format: @<text>@Html.ActionLink("Ver Actividad","VerActividadUsuario","Moderacion",new {id=item.Id}, null)</text>),
+                    grid.Column("Editar", "Editar", format: @<b><a href="@Url.Action("BanearUsuario", "Moderacion", new { id = @item.id }, null)"><img src="../../sh/img/knobs-icons/Knob Cancel.png" alt="Banear"/></a></b>)
+                    //grid.Column("Tipo", canSort: true, format: @<text>@Html.ActionLink((string)item.Tipo,"VerContenido","Contenido",new {id=item.Id}, null)</text>),
+                    //grid.Column("Usuario", "Titulo", canSort: true, format:@<b>@item.Titulo</b>),
+                    //grid.Column("Descripcion", "Descripcion", format:@<b>@item.Descripcion</b>),
+                    //grid.Column("Estado", "Estado", canSort: true, format: @<b>@item.Estado</b>),
+                    //grid.Column("FechaPublicacion", "Fecha", canSort: true, format: @<b>@item.FechaPublicacion</b>)
+                ));      
+}
+
+<br /><a href="@Url.Content("~/Moderacion/Index#cuerpo")">Menu admin</a><br />

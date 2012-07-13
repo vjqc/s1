@@ -122,6 +122,35 @@ namespace BiblioContenidos_2.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult VerCurso(string id)
+        {
+            //string i = id;
+            //int a = 0;
+            if (!String.IsNullOrEmpty(id) && EsNro(id) )
+            {
+                int IdContenido = Convert.ToInt32(id);
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                Contenido contenido = db.Contenidos.Single(c => c.Id == IdContenido);
+
+                ViewBag.Curso = contenido;
+                
+                //int NroMeGustas = db.Gustas.Count(p => p.IdContenido == IdContenido);
+                //if (NroMeGustas == 0) ViewBag.msg = "Se la primera persona a quien le gusta ésto";
+                //else if (NroMeGustas == 1) ViewBag.msg = "A una persona le gusta ésto";
+                //else ViewBag.msg = "A " + NroMeGustas + " personas les gusta ésto";
+
+                int NroMeGustas = db.Gustas.Count(p => p.IdContenido == IdContenido);
+                if (NroMeGustas == 0) ViewBag.msg = "Se la primera persona a quien le gusta ésto";
+                else if (NroMeGustas == 1) ViewBag.msg = "A una persona le gusta ésto";
+                else ViewBag.msg = "A " + NroMeGustas + " personas les gusta ésto";
+
+
+                ViewBag.Comentarios = GetComentarios(IdContenido);
+            }
+            return View();
+        }
+
         [HttpPost]
         [Authorize(Roles = "Usuario")]
         public string Comentar(Comentario com, string conte)
@@ -131,6 +160,8 @@ namespace BiblioContenidos_2.Controllers
                 int IdContenido = Int32.Parse(conte);
                 DataClasses1DataContext db = new DataClasses1DataContext();
                 string NombreUsuario = User.Identity.Name.ToString();
+
+                if (NombreUsuario == "Admin") return "";
                 System.Guid IdUs = db.aspnet_Users.Single(a => a.UserName == NombreUsuario).UserId;
                 int IdUsuario = db.Usuarios.Single(a => a.UserId == IdUs).Id;
 
@@ -159,7 +190,7 @@ namespace BiblioContenidos_2.Controllers
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
 
-            int CantidadComentarios = db.Comentarios.Count(a => a.IdContenido == IdContenido);
+            int CantidadComentarios = db.Comentarios.Count(a => a.IdContenido == IdContenido && a.Estado=="Aceptado");
             List<ComentarioView> ListaCom = db.Comentarios.Where(a => a.IdContenido == IdContenido && a.Estado == "Aceptado").Select(c => new ComentarioView()
             {
                 Avatar = c.Usuario.Avatar,
@@ -170,11 +201,13 @@ namespace BiblioContenidos_2.Controllers
             }).ToList();
             
             string str = (CantidadComentarios == 0) ? "No hay comentarios" : "Hay " + CantidadComentarios + " comentario(s)";
+             //string str = (CantidadComentarios == 0) ? "No hay comentarios" : "<div id='comments-block'><div class='n-comments'>"+CantidadComentarios+"</div> <div class='n-comments-text'>comments</div>";
+            
 
             str += "<table>";
             foreach (var item in ListaCom)
             {
-                str += "<tr><td>" + item.Avatar + "</td><td>" + item.Nick + "</td><td>" + item.Puntuacion + "</td><td>" + item.FechaPublicacion + "</td></tr>";
+                str += "<tr><td><img src='" + Url.Action("ObtenerUrlImagen", "Home", new { id = item.Avatar }) + "' alt='' height='50' width='50'/>" + item.Nick + "("+ item.Puntuacion + ")</td><td>" + item.FechaPublicacion + "</td></tr>";
                 str += "<tr><td>" + item.ContenidoComentario + "</td></tr><tr><td></td></tr>";
             }
             str += "</table>";
@@ -212,5 +245,77 @@ namespace BiblioContenidos_2.Controllers
             return Redirect("/Moderacion/ModeracionContenidos");
         }
 
+        public ActionResult VerCurso2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Buscar(string s)
+        {
+            string str = s;
+            ViewBag.cad = str;
+            
+            if (!String.IsNullOrEmpty(str))
+                return Redirect("../Contenido/Busqueda/" + str);
+
+            return Redirect("../Home/Index");
+        }
+
+        [HttpGet]
+        public ActionResult Busqueda(string id)
+        {
+            string str = id;
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            var res = db.Contenidos.Where(c => c.Estado=="Aceptado" && (
+                                               c.Tipo.Contains(str) ||
+                                               c.Titulo.Contains(str) ||
+                                               c.Descripcion.Contains(str)
+                                            )
+                                         );
+            ViewBag.data = res;
+            return View(res);
+        }
+
+        [HttpGet]
+        public ActionResult VerContenido(string id)
+        {
+            if (EsNro(id))
+            {
+                int IdContenido = Int32.Parse(id);
+                DataClasses1DataContext db = new DataClasses1DataContext();
+
+                string Tipo = db.Contenidos.Single(c => c.Id == IdContenido).Tipo;
+                switch (Tipo)
+                {
+                    case "Libro": return Redirect("../../DetalleLibro/Index/" + IdContenido);
+                    case "Articulo": return Redirect("../../Contenido/VerArticulo/" + IdContenido);
+                    case "Curso": return Redirect("../../Contenido/VerCurso/" + IdContenido);
+                }
+            }
+
+            return Redirect("../../Home/Index/");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Usuario")]
+        public ActionResult ReEdicion(string id)
+        {
+            if (EsNro(id))
+            {
+                int IdContenido = Int32.Parse(id);
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                Contenido cnt = db.Contenidos.Single(c => c.Id == IdContenido);
+                ViewBag.Contenido = cnt;
+                //ViewBag.Contenido.Descripcion = VicoCode(cnt.Descripcion);
+            }
+            return View();
+        }
+
+        public ActionResult UltimosLibros()
+        {
+            return View();
+        }
     }
 }

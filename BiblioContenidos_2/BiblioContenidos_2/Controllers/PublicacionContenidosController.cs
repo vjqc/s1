@@ -53,11 +53,73 @@ namespace BiblioContenidos_2.Controllers
             return View();
         }
 
+        public bool EsNro(string str)
+        {
+            for (int k = 0; k < str.Length; k++)
+                if (str[k] < '0' || str[k] > '9')
+                    return false;
+            return true;
+        } 
+
         public ActionResult Ver()
         {
             DataClasses1DataContext db = new DataClasses1DataContext();
             ViewBag.lista = db.Contenidos;
             return View();
+        }
+
+
+        public ActionResult TinyEditor()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult TinyEditor(string editor)
+        {
+            //ViewBag.curso = editor;
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            Contenido curso = new Contenido()
+            {
+                FechaPublicacion = DateTime.Now,
+                IdUsuario = IdUsuarioActual(),
+                Tipo = "Curso",
+                Titulo = "",
+                Descripcion = editor,
+                UrlReal = "",
+                UrlVirtual = "",
+                Estado = "Pendiente"
+            };
+
+            db.Contenidos.InsertOnSubmit(curso);
+            db.SubmitChanges();
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Usuario")]
+        [ValidateInput(false)]
+        public ActionResult GuardarReEdicionCurso(string IdContenido, string editor)
+        {
+            //Contenido c = info;
+            if (!String.IsNullOrEmpty(editor) && EsNro(IdContenido))
+            {
+                int Id = Int32.Parse(IdContenido);
+
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                Contenido cont = db.Contenidos.Single(c => c.Id == Id);
+
+                cont.FechaPublicacion = DateTime.Now;
+                cont.Descripcion = editor;
+                cont.Estado = "Aceptado";
+
+                //db.Contenidos.InsertOnSubmit(info);
+                db.SubmitChanges();
+            }
+            return Redirect("../Home/Index");
         }
     }
 }

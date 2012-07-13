@@ -1,0 +1,29 @@
+﻿@model BiblioContenidos_2.Models.ModeracionCategorias
+@using Trirand.Web.Mvc
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- The jQuery UI theme that will be used by the grid -->    
+        @*<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.17/themes/redmond/jquery-ui.css" />*@
+        <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/themes/base/jquery-ui-1.8.21.custom.css")" />
+    <!-- The Css UI theme extension of jqGrid -->
+    <link rel="stylesheet" type="text/css" href="../../Content/themes/ui.jqgrid.css" />    
+    <!-- jQuery library is a prerequisite for jqGrid -->
+    
+    
+    @*<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.7.1.min.js" type="text/javascript"></script>*@
+    <!-- language pack - MUST be included before the jqGrid javascript -->
+    <script type="text/javascript" src="../../Scripts/trirand/i18n/grid.locale-sp.js"></script>
+    <!-- the jqGrid javascript runtime -->
+    <script type="text/javascript" src="../../Scripts/trirand/jquery.jqGrid.min.js"></script>    
+    <style type="text/css">
+        body { font-size: 60%; }
+    </style>
+
+<h2>Index</h2>
+
+<div>
+    @Html.Trirand().JQGrid(Model.CategoriasGrid, "JQGridCates")
+</div>

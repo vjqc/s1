@@ -1,20 +1,48 @@
-﻿@{
+﻿@model IEnumerable<BiblioContenidos_2.Models.Contenido>
+@{
     ViewBag.Title = "ModeracionContenidos";
 }
 
 <h2>Moderacion de Contenidos</h2>
 
-<table>
-@foreach (var item in @ViewBag.ListaPend)
-{ 
-    <tr><td>@item.FechaPublicacion</td><td>@item.Titulo</td><td>@item.Tipo</td><td>@item.IdUsuario</td><td>@item.Estado</td>
-        <td>
-            @if (@item.Tipo == "Libro")
-            { @Html.ActionLink("Ver", "Index", "DetalleLibro", new { id = @item.Id }, null) }
+<h3>Publicaciones pendientes (@ViewBag.NP) </h3>
+
+
+    <table>
+    @foreach (var item in @ViewBag.ListaPend)
+    { 
+        <tr><td>@item.FechaPublicacion</td><td>@item.Titulo</td><td>@item.Tipo</td><td>@item.IdUsuario</td><td>@item.Estado</td>
+            <td>
+                @if (@item.Tipo == "Libro")
+                { @Html.ActionLink("Ver", "Index", "DetalleLibro", new { id = @item.Id }, null) }
             
-            @if (@item.Tipo == "Articulo")
-            { @Html.ActionLink("Ver", "VerArticulo", "Contenido", new { id = @item.Id }, null) }                                  
-        </td>
-    </tr>
+                @if (@item.Tipo == "Articulo")
+                { @Html.ActionLink("Ver", "VerArticulo", "Contenido", new { id = @item.Id }, null) }                                  
+
+                @if (@item.Tipo == "Curso")
+                { @Html.ActionLink("Ver", "VerCurso", "Contenido", new { id = @item.Id }, null) } 
+            </td>
+        </tr>
+    }
+    </table>
+
+
+<h3>Reporte de publicaciones</h3>
+@{
+    
+        var data = ViewBag.data;                  
+        var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
+        grid.Pager(WebGridPagerModes.NextPrevious);
+                                                                                
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                columns: grid.Columns(
+                    grid.Column("Tipo", canSort: true, format: @<text>@Html.ActionLink((string)item.Tipo,"VerContenido","Contenido",new {id=item.Id}, null)</text>),
+                    grid.Column("Titulo", "Titulo", canSort: true, format:@<b>@item.Titulo</b>),
+                    grid.Column("Descripcion", "Descripcion", format:@<b>@MvcHtmlString.Create(@item.Descripcion)</b>),
+                    grid.Column("Estado", "Estado", canSort: true, format: @<b>@item.Estado</b>),
+                    grid.Column("FechaPublicacion", "Fecha", canSort: true, format: @<b>@item.FechaPublicacion</b>)
+                ));        
 }
-</table>
+<br /><a href="@Url.Content("~/Moderacion/Index#cuerpo")">Menu admin</a><br />

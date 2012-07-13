@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BiblioContenidos_2.Models.DetalleActividad>
+
+@{
+    ViewBag.Title = "VerActividadUsuario";
+}
+
+Actividad de: 
+<img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @ViewBag.usuario.Avatar })" alt="" height="50" width="50" />@ViewBag.usuario.aspnet_User.UserName<br/> 
+
+@{                
+        var grid = new WebGrid(Model, canSort: true, canPage: true, rowsPerPage: 5);
+        grid.Pager(WebGridPagerModes.NextPrevious);
+                                                                                
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                columns: grid.Columns(
+                    //grid.Column("Usuario", "Usuario", canSort: true, format: @<b><img src="@Url.Action("ObtenerUrlImagen", "Home", new { id = @item.Avatar })" alt="" height="50" width="50" />@item.aspnet_User.UserName</b>),
+                    //grid.Column("Activida","Actividad", canSort: false, format: @<text>@Html.ActionLink("Ver Actividad","VerActividadUsuario","Moderacion",new {id=item.Id}, null)</text>),
+                    //grid.Column("Editar", "Editar", format: @<b><a href="@Url.Action("BanearUsuario", "Moderacion", new { id = @item.id }, null)"><img src="../../sh/img/knobs-icons/Knob Cancel.png" alt="Banear"/></a></b>)
+                    //grid.Column("Tipo", canSort: true, format: @<text>@Html.ActionLink((string)item.Tipo,"VerContenido","Contenido",new {id=item.Id}, null)</text>),
+                    //grid.Column("Usuario", "Titulo", canSort: true, format:@<b>@item.Titulo</b>),
+                    //grid.Column("Descripcion", "Descripcion", format:@<b>@item.Descripcion</b>),
+                    grid.Column("Fecha", "Fecha", canSort: true, format: @<b>@item.FechaPublicacion</b>),
+                    grid.Column("Titulo", "Titulo", canSort: true, format: @<b>@item.Titulo</b>),
+                    grid.Column("Descripcion", "Descripcion", canSort: true, format: @<b>@item.Descripcion</b>),
+                    grid.Column("Tipo", "Tipo", canSort: true, format: @<b>@item.Tipo</b>),
+                                                  grid.Column("Estado", "Estado", canSort: true, format: @<b>@item.Estado</b>)
+                //grid.Column("FechaPublicacion", "Fecha", canSort: true, format: @<b>@item.FechaPublicacion</b>)
+                                                                               ));      
+}
+@*<a href="@Url.Content("~/Moderacion/ModeracionUsuarios#cuerpo")">Atras</a><br />*@
+<a href="@Url.Content("~/Moderacion/ModeracionUsuarios#cuerpo")"><img src="../../sh/img/knobs-icons/Knob Left.png" alt="Atras"/></a>
+<br /><a href="@Url.Content("~/Moderacion/Index#cuerpo")">Menu admin</a><br />
+

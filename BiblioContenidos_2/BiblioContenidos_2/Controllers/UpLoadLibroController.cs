@@ -8,6 +8,8 @@ using System.IO;
 
 namespace BiblioContenidos_2.Controllers
 {
+    [Authorize(Roles = "Usuario")]
+    
     public class UpLoadLibroController : Controller
     {
         //

@@ -1,0 +1,26 @@
+﻿@using BiblioContenidos_2.Models;
+@{
+    ViewBag.Title = "ModeracionComentarios";
+}
+
+<h2>...</h2>
+
+<center>
+    <h2>Moderacion de comentarios</h2>
+    <h6>Contenidos con mas comentarios</h6>
+    <img src="/Moderacion/ContenidosConMasComentarios" />
+</center>
+
+<br />
+<table>
+    <tr><th>Id Contenido</th><th>Descripcion</th><th>Nro de Comentarios</th></tr>
+    @foreach (var item in @ViewBag.lista)
+    {
+        string str = @item.Conte.Descripcion;
+        <tr><td>@item.Conte.Id</td><td>@item.Conte.Descripcion.Substring(0, Util.NSub(str))</td><td>@item.N</td></tr>
+    }
+</table>
+<br />
+<a href="@Url.Content("~/Moderacion/BuscarPalabrasOfensivas")">Buscar palabras ofensivas</a><br />
+
+<br /><a href="@Url.Content("~/Moderacion/Index#cuerpo")">Menu admin</a><br />

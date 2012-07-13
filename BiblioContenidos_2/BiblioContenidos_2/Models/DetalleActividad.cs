@@ -13,5 +13,8 @@ namespace BiblioContenidos_2.Models
         public string Estado { set; get; }
         public int Puntos{set; get;}
         public int TotalMeGusta{set; get;}
+        public int IdContenido { set; get; }
+
+        public string Descripcion { set; get; }
     }
 }

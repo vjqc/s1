@@ -38,6 +38,7 @@
                     }
                 </td>
                 <td align="center">@item.TotalMeGusta</td>
+                <td>@Html.ActionLink("ReEditar","ReEdicion","Contenido", new { id = @item.IdContenido }, null)</td>
             </tr>
         }
         <tr><td></td><td></td><td></td><td></td><td>Total MeGusta: </td><td align="center">@ViewBag.TotalG</td></tr>
